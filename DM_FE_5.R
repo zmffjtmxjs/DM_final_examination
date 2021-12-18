@@ -60,3 +60,25 @@ rf1000.CM
 k.CM
 sr.CM
 sp.CM
+
+#각 혼동행렬로 부터 정확도 계산
+#코드 작성 간략화를 위한 계산&출력 함수 작성
+CM_acu.cal = function(CM_table) {
+  result = (CM_table[1:1] + CM_table[2:2]) / sum(CM_table) * 100
+  return(paste(round(result, 2), "%"))
+}
+
+#결과 출력
+data.frame(model = c("Decision Tree",
+                     "RandomForest(t=50)",
+                     "RandomForest(t=1000)",
+                     "K-NN",
+                     "SVM radial",
+                     "SVM Polynomial"),
+           Accuracy = c(CM_acu.cal(dt.CM), 
+                        CM_acu.cal(rf50.CM), 
+                        CM_acu.cal(rf1000.CM), 
+                        CM_acu.cal(k.CM), 
+                        CM_acu.cal(sr.CM), 
+                        CM_acu.cal(sp.CM)))
+
