@@ -20,3 +20,15 @@ ucla.test = ucla[idx.test, ]
 
 str(ucla.train)
 str(ucla.test)
+
+#학습데이터로 모델 작성
+#결정 트리
+dt = rpart(admit~., data = ucla.train)
+#랜덤포레스트
+rf50 = randomForest(admit~., data = ucla.train, ntree = 50)
+rf1000 = randomForest(admit~., data = ucla.train, ntree = 1000)
+#KNN
+k = knn(ucla.train, ucla.test, ucla.train$admit, k = 5)
+#SVM
+sr = svm(admit~., data = ucla.train)
+sp = svm(admit~., data = ucla.train, kernel = 'polynomial')
